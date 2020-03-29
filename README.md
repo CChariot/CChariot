@@ -16,7 +16,7 @@ npm install body-parser --save
 
 ## Setup Database:
 
-run pgAdmin4 => Login => right click User: Postgre => Properties => Definition => Password: Postgre => Save
+run pgAdmin4 => Login => right click User: Postgre => Properties => Definition => Password: postgres => Save
 
 ## To test:
 
