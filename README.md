@@ -1,7 +1,7 @@
 # CChariot
 Full stack app for tracking employees' hours.
 
-TO Start
+__TO Start
 
 git clone https://github.com/CChariot/Paymenism
 
@@ -13,6 +13,6 @@ npm install pg --save
 
 npm install body-parser --save
 
-Setup Database
+__Setup Database
 
-run
+run pgAdmin4 => Login => right click User: Postgre => Properties => Definition => Password: Postgre => Save
