@@ -22,10 +22,6 @@ run pgAdmin4 => Login => right click User: Postgre => Properties => Definition =
 
 npm run server
 
-## Setup Database
-
-run pgAdmin4 => Login => right click User: Postgre => Properties => Definition => Password: Postgre => Save
-
 ## To test: npm run server
 
 Correct output:
