@@ -1,7 +1,7 @@
 # CChariot
 Full stack app for tracking employees' hours.
 
-__TO Start
+##To Start
 
 git clone https://github.com/CChariot/Paymenism
 
@@ -13,6 +13,15 @@ npm install pg --save
 
 npm install body-parser --save
 
-__Setup Database
+##Setup Database
 
 run pgAdmin4 => Login => right click User: Postgre => Properties => Definition => Password: Postgre => Save
+
+
+##To test: npm run server
+
+Correct output:
+[nodemon] starting `node server`
+Server listening on port 5000!
+PostgreSQL connected: Sun Mar 29 2020 12:35:50 GMT-0400 (Eastern Daylight Time).
+
