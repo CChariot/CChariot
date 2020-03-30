@@ -60,10 +60,10 @@ class AddEmployeePage extends React.Component {
 
     return (
       <div className="container-fluid text-center">
-        <div className="row justify-content-center">
+        <div>
           <h1>Add a New Employee</h1>
           <br/>
-          <Form>
+          <div>
               <label>Emp ID</label>
               <input 
                 placeholder="Emp ID..."
@@ -104,7 +104,7 @@ class AddEmployeePage extends React.Component {
               <br/>
 
               <button onClick={this.addEmpHandler}>Add</button>
-          </Form>
+          </div>
         </div>
       </div>
     );
