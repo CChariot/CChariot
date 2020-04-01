@@ -22,8 +22,6 @@ run pgAdmin4 => Login => right click User: Postgre => Properties => Definition =
 
 npm run server
 
-## To test: npm run server
-
 Correct output:
 [nodemon] starting `node server`
 Server listening on port 5000!
