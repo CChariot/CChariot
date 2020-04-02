@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/employees", require("./api/employees"));
+app.use("/api/departments", require("./api/departments"));
+app.use("/api/employeeprofile", require("./api/employeeprofile"));
 
 if (ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
