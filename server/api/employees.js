@@ -13,14 +13,14 @@ router.get("/:emp_id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  var employee = req.body.employee;
+  var emp_id = req.body.emp_id;
   var last_name = req.body.last_name;
   var first_name = req.body.first_name;
-  var dob = req.body.bod;
+  var dob = req.body.dob;
   var rest_day = req.body.rest_day;
 
   Employees.insert(
-    employee,
+    emp_id,
     last_name,
     first_name,
     dob,

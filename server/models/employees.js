@@ -1,6 +1,6 @@
 const db = require("../database");
 
-const select = "SELECT * from employees WHERE Emp_ID == '$1'";
+const select = "SELECT * from employees WHERE Emp_ID = ($1)";
 
 class Employees {
   static retrieve(values, callback) {
@@ -10,10 +10,10 @@ class Employees {
     });
   }
 
-  static insert(employee, last_name, first_name, dob, rest_day, callback) {
+  static insert(emp_id, last_name, first_name, dob, rest_day, callback) {
     db.query(
       "INSERT INTO employees (Emp_ID, last_name, first_name, dob, rest_day) VALUES ($1, $2, $3, $4, $5)",
-      [employee, last_name, first_name, dob, rest_day],
+      [emp_id, last_name, first_name, dob, rest_day],
       (err, res) => {
         if (err.error) return callback(err);
         callback(res);
