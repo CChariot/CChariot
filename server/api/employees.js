@@ -12,6 +12,13 @@ router.get("/:emp_id", (req, res) => {
   });
 });
 
+router.get("/", (req, res) => {
+  Employees.retrieveAll((err, employees) => {
+    if (err) return res.json(err);
+    return res.json(employees);
+  });
+});
+
 router.post("/", (req, res) => {
   var emp_id = req.body.emp_id;
   var last_name = req.body.last_name;

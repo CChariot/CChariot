@@ -13,6 +13,13 @@ router.get("/:Emp_id/:Sup_id", (req, res) => {
   });
 });
 
+router.get("/", (req, res) => {
+  Departments.retrieveAll((err, employees) => {
+    if (err) return res.json(err);
+    return res.json(employees);
+  });
+});
+
 router.post("/", (req, res) => {
   var Emp_id = req.body.Emp_id;
   var Sup_id = req.body.Sup_id;

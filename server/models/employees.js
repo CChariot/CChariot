@@ -1,10 +1,18 @@
 const db = require("../database");
 
 const select = "SELECT * from employees WHERE Emp_ID = ($1)";
+const selectAll = "SELECT * from employees";
 
 class Employees {
   static retrieve(values, callback) {
     db.query(select, [values], (err, res) => {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
+
+  static retrieveAll(callback) {
+    db.query(selectAll, (err, res) => {
       if (err.error) return callback(err);
       callback(res);
     });
