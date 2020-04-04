@@ -9,11 +9,12 @@ class ShowEmployeePage extends React.Component {
     }
   
     componentDidMount() {
-      //this.getEmpHandler();
+      this.getEmpHandler();
     }
-    /*
-    getEmpHandler = () => {
-      fetch("/api/employee")
+    
+    getEmpHandler = async() => {
+      
+      await fetch("http://localhost:5000/api/employees")
         .then(res => res.json())
         .then(data => {
           this.setState({
@@ -22,7 +23,8 @@ class ShowEmployeePage extends React.Component {
           });
         })
         .catch(err => console.log("API ERROR: ", err));
-    }*/
+      console.log(this.state.data);
+    }
   
     render() {
       if(this.state.loading) {
@@ -32,7 +34,7 @@ class ShowEmployeePage extends React.Component {
       return (
         <div className="container-fluid text-center">
           <div className="row justify-content-center">
-            { this.state.data }
+            {/* this.state.data */}
           </div>
         </div>
       );

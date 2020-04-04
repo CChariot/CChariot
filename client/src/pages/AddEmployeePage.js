@@ -7,8 +7,8 @@ class AddEmployeePage extends React.Component {
     emp_id: '',
     last: '',
     first: '',
-    dob: new Date(),
-    rest: '',
+    dob: new Date(new Date().setHours(0, 0, 0)),
+    rest: new Date(new Date().setHours(0, 0, 0))
   }
 
   idInputHandler = (e) => {
@@ -25,35 +25,31 @@ class AddEmployeePage extends React.Component {
 
   dobInputHandler = (date) => {
     this.setState({ dob: date });
+  }; 
+
+  restInputHandler = (date) => {
+    this.setState({ rest: date });
   };
 
-  restInputHandler = (e) => {
-    this.setState({ rest: e.target.value });
-  };
+  addEmpHandler = async() => {
 
-  addEmpHandler = () => {
-
-    console.log(this.state)
-    /*fetch('/api/employee', {
+    await fetch('http://localhost:5000/api/employees', {
       method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(
         { emp_id: this.state.emp_id, 
-          last: this.state.last, 
-          first: this.state.first, 
+          last_name: this.state.last, 
+          first_name: this.state.first, 
           dob: this.state.dob, 
           rest_day: this.state.rest,
            })
-    })
-    .then(res => res.json())
-    .then(res => {
-      this.setState({ 
-        emp_id: '',
-        last: '',
-        first: '',
-        dob: new Date(),
-        rest: '', });
-    });*/
+    }).then(function(res){
+      return res.json(); //error here
+    }).then(function(data){
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   render() {
@@ -96,8 +92,8 @@ class AddEmployeePage extends React.Component {
               <br/>
 
               <label>Rest Day</label>
-              <input 
-                placeholder="rest day..."
+              <DatePicker
+                selected={this.state.rest}
                 value={this.state.rest}
                 onChange={this.restInputHandler}
               />

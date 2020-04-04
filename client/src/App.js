@@ -17,7 +17,7 @@ import './App.css';
 function Navigation(props) {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark shadow mb-3">
-      <Link className="navbar-brand" to="/">Micro Blog</Link>
+      <Link className="navbar-brand" to="/">Home</Link>
       <ul className="navbar-nav mr-auto">
         
         <li className="nav-item">
