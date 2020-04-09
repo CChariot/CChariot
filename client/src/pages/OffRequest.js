@@ -46,7 +46,6 @@ export default class OffRequest extends Component {
     render() {
         return (
             <div>
-                <form>
                     <div className="text-center">
                     <h2>Dayoff Requst</h2>
                     <p>Comment your off request below</p>
@@ -72,7 +71,6 @@ export default class OffRequest extends Component {
                     <br/>
                     <button onClick={this.submitHandler}>Send</button>
                     </div>
-                </form>
             </div>
         )
     }
