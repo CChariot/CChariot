@@ -6,16 +6,14 @@ var router = express.Router();
 router.get("/:emp_id", (req, res) => {
   var emp_id = req.params.emp_id;
 
-  Employees.retrieve(emp_id, (err, employees) => {
-    if (err) return res.json(err);
-    return res.json(employees);
+  Employees.retrieve(emp_id, (respond) => {
+    return res.json(respond);
   });
 });
 
 router.get("/", (req, res) => {
-  Employees.retrieveAll((err, employees) => {
-    if (err) return res.json(err);
-    return res.json(employees);
+  Employees.retrieveAll((respond) => {
+    return res.json(respond);
   });
 });
 
@@ -32,9 +30,8 @@ router.post("/", (req, res) => {
     first_name,
     dob,
     rest_day,
-    (err, result) => {
-      if (err) return res.json(err);
-      return res.json(result);
+    (respond) => {
+      return res.json(respond);
     }
   );
 });

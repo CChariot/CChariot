@@ -7,16 +7,14 @@ router.get("/:Emp_id/:Sup_id", (req, res) => {
   var Emp_id = req.params.Emp_id;
   var Sup_id = req.params.Sup_id;
 
-  Departments.retrieve(Emp_id, Sup_id, (err, employees) => {
-    if (err) return res.json(err);
-    return res.json(employees);
+  Departments.retrieve(Emp_id, Sup_id, (respond) => {
+    return res.json(respond);
   });
 });
 
 router.get("/", (req, res) => {
-  Departments.retrieveAll((err, employees) => {
-    if (err) return res.json(err);
-    return res.json(employees);
+  Departments.retrieveAll((respond) => {
+    return res.json(respond);
   });
 });
 
@@ -31,9 +29,8 @@ router.post("/", (req, res) => {
     Sup_id,
     department_name,
     operating_hour,
-    (err, result) => {
-      if (err) return res.json(err);
-      return res.json(result);
+    (respond) => {
+      return res.json(respond);
     }
   );
 });
