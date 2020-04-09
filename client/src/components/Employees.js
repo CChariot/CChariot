@@ -86,36 +86,5 @@ function EmployeeData(props){
               </tbody>
             </table>
           )
-
-    /*renderEmployeeList = () => {
-
-        let data = this.state.data;
-
-        if(data){
-
-            let jsxdatalist = data.map( (employee) =>
-                <div className='col-6 mx-auto col-md-6 col-lg-3 my-3 rounded float-left' key={employee.emp_id}>
-                
-                <div className='card'>
-                    <div className='card-content'>
-                        <span className='card-title'>{employee.emp_id}</span>
-                        
-                        <br />{employee.first_name}&nbsp;&nbsp;{employee.last_name}<br />
-                        DoB: {employee.dob.split("T")[0]}<br />
-                        Rest day: {employee.rest_day.split("T")[0]}<br />
-                    </div>
-                
-                    <div className='card-action'>
-                        <button className='btn btn-outline-info'
-                            onClick={console.log('i dont know what to do now')}>Add in future</button>
-                    </div>
-                </div>
-                </div>
-            );
-
-            return jsxdatalist;
-        }
-        else return null;
-    };*/
 }
 export default EmployeeData;
