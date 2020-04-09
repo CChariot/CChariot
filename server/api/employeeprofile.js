@@ -6,9 +6,8 @@ var router = express.Router();
 router.get("/:Emp_ID", (req, res) => {
   var Emp_ID = req.params.Emp_ID;
 
-  Employeeprofile.retrieve(Emp_ID, (err, employees) => {
-    if (err) return res.json(err);
-    return res.json(employees);
+  Employeeprofile.retrieve(Emp_ID, (respond) => {
+    return res.json(respond);
   });
 });
 
@@ -23,9 +22,8 @@ router.post("/", (req, res) => {
     Sup_ID,
     Department_Name,
     Hourly_Rate,
-    (err, result) => {
-      if (err) return res.json(err);
-      return res.json(result);
+    (respond) => {
+      return res.json(respond);
     }
   );
 });
