@@ -70,8 +70,6 @@ class AddEmployeePage extends React.Component {
     }).catch((error) => {
       console.log(error);
     });
-
-    await fetch()
   };
 
   render() {
@@ -131,7 +129,7 @@ class AddEmployeePage extends React.Component {
                 value={this.state.department}
                 onChange={this.dpInputHandler} 
                 required
-              />&nbsp;&nbsp;&nbsp;<a onClick={this.redirect}>Add New Department</a>
+              />&nbsp;&nbsp;&nbsp;<a onClick={this.redirect}>Add New Department?</a>
               <br/>
 
               <label for='supid'>Supervisor id</label>

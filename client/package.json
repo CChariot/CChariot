@@ -9,7 +9,8 @@
     "react-dropdown": "^1.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.2",
-    "react-table": "^7.0.4"
+    "react-table": "^7.0.4",
+    "react-time-picker": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
