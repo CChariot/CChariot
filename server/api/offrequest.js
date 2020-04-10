@@ -3,10 +3,10 @@ var Request = require("../models/offrequest");
 
 var router = express.Router();
 
-router.get("/:Emp_ID", (req, res) => {
-  var Emp_ID = req.params.Emp_ID;
+router.get("/:Request_ID", (req, res) => {
+  var Request_ID = req.params.Request_ID;
 
-  Request.retrieve(Emp_ID, (respond) => {
+  Request.retrieve(Request_ID, (respond) => {
     return res.json(respond);
   });
 });
