@@ -4,7 +4,7 @@ CREATE TABLE employees
 	last_name VARCHAR(50) NOT NULL,
 	first_name VARCHAR(50) NOT NULL,
 	dob DATE NOT NULL,
-	rest_day DATE NOT NULL
+	rest_day VARCHAR(50) NOT NULL
 );
 CREATE TABLE department
 (
@@ -20,7 +20,7 @@ VALUES(
 		'HAHA',
 		'lol',
 		'01/02/1997',
-		'01/02/1997'
+		'Monday'
 );
 
 INSERT INTO department
@@ -32,4 +32,12 @@ VALUES(
 		2,
 		'MTA',
 		3
+);
+
+
+CREATE TABLE offrequest (
+	Request_ID INT PRIMARY KEY,
+	Emp_ID INT NOT NULL,
+	Request_DATE DATE NOT NULL,
+	Reason VARCHAR(200)
 );

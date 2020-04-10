@@ -1,6 +1,8 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 class AddEmployeePage extends React.Component {
   state = {
@@ -8,7 +10,9 @@ class AddEmployeePage extends React.Component {
     last: '',
     first: '',
     dob: new Date(new Date().setHours(0, 0, 0)),
-    rest: new Date(new Date().setHours(0, 0, 0))
+    rest: '',
+    department: '',
+    sup_id: '123',
   }
 
   idInputHandler = (e) => {
@@ -27,11 +31,27 @@ class AddEmployeePage extends React.Component {
     this.setState({ dob: date });
   }; 
 
-  restInputHandler = (date) => {
-    this.setState({ rest: date });
+  restInputHandler = (day) => {
+    this.setState({ rest: day.value });
   };
 
-  addEmpHandler = async() => {
+  dpInputHandler = (e) => {
+    this.setState({ department: e.target.value });
+  }
+
+  supidInputHandler = (e) => {
+    this.setState({ sup_id: e.target.value });
+  }
+
+
+  redirect = () => {
+
+    this.props.history.push('/add-department')
+  }
+
+  addEmpHandler = async(event) => {
+
+    event.preventDefault();
 
     await fetch('http://localhost:5000/api/employees', {
       method: 'post',
@@ -50,37 +70,46 @@ class AddEmployeePage extends React.Component {
     }).catch((error) => {
       console.log(error);
     });
+
+    await fetch()
   };
 
   render() {
 
+    const options = [
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
+    ];
+
     return (
-      <div className="container-fluid text-center">
+      <div className="text-center">
         <div>
           <h1>Add a New Employee</h1>
           <br/>
-          <div>
-              <label>Emp ID</label>
+          <form onSubmit={this.addEmpHandler}>
+              <label for='empid'>Emp ID</label>
               <input 
-                placeholder="Emp ID..."
+                placeholder="Emp ID..." id='empid' 
                 value={this.state.emp_id}
-                onChange={this.idInputHandler}
+                onChange={this.idInputHandler} 
+                required
               />
               <br/>
             
-              <label>Last Name</label>
+              <label for='fn'>Last Name</label>
               <input 
-                placeholder="last name..."
+                placeholder="last name..." id='fn' 
                 value={this.state.last}
-                onChange={this.lastInputHandler}
+                onChange={this.lastInputHandler} 
+                required
               />
               <br/>
 
-              <label>First Name</label>
+              <label for='ln'>First Name</label>
               <input 
-                placeholder="first name..."
+                placeholder="first name..." id='ln'
                 value={this.state.first}
-                onChange={this.firstInputHandler}
+                onChange={this.firstInputHandler} 
+                required
               />
               <br/>
 
@@ -92,15 +121,30 @@ class AddEmployeePage extends React.Component {
               <br/>
 
               <label>Rest Day</label>
-              <DatePicker
-                selected={this.state.rest}
-                value={this.state.rest}
-                onChange={this.restInputHandler}
+              <Dropdown options={options} onChange={this.restInputHandler} 
+                value={this.state.rest} placeholder="Select an option" />
+              <br/>
+
+              <label for='dp'>Department</label>
+              <input 
+                placeholder="department..." id='dp'
+                value={this.state.department}
+                onChange={this.dpInputHandler} 
+                required
+              />&nbsp;&nbsp;&nbsp;<a onClick={this.redirect}>Add New Department</a>
+              <br/>
+
+              <label for='supid'>Supervisor id</label>
+              <input 
+                placeholder="supervisor id..." id='supid'
+                value={this.state.sup_id}
+                onChange={this.supidInputHandler} 
+                required
               />
               <br/>
 
-              <button onClick={this.addEmpHandler}>Add</button>
-          </div>
+              <input type="submit" value="Add" />
+          </form>
         </div>
       </div>
     );

@@ -10,10 +10,10 @@ class Request {
     });
   }
 
-  static insert(Request_ID, Request_DATE, Emp_ID, callback) {
+  static insert(Request_ID, Request_DATE, Emp_ID, Reason, callback) {
     db.query(
-      "INSERT INTO offrequest (Request_ID, Request_DATE, Emp_ID) VALUES ($1, $2, $3)",
-      [Request_ID, Request_DATE, Emp_ID],
+      "INSERT INTO offrequest (Request_ID, Request_DATE, Emp_ID, Reason) VALUES ($1, $2, $3)",
+      [Request_ID, Request_DATE, Emp_ID, Reason],
       (err, res) => {
         if (err.error) return callback(err);
         callback(res);
