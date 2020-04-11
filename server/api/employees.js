@@ -23,6 +23,7 @@ router.post("/", (req, res) => {
   var first_name = req.body.first_name;
   var dob = req.body.dob;
   var rest_day = req.body.rest_day;
+  var department = req.body.department;
 
   Employees.insert(
     emp_id,
@@ -30,6 +31,7 @@ router.post("/", (req, res) => {
     first_name,
     dob,
     rest_day,
+    department,
     (respond) => {
       return res.json(respond);
     }

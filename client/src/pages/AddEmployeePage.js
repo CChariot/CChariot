@@ -13,7 +13,41 @@ class AddEmployeePage extends React.Component {
     rest: '',
     department: '',
     sup_id: '123',
+    hasDepartment: false,
+    departmentOptions: []
   }
+
+  componentDidMount = () =>{
+    this.getDeparmentInfo();
+  }
+
+
+  getDeparmentInfo = async() => {
+
+    await fetch('http://localhost:5000/api/departments')
+      .then(res => res.json())
+      .then(data => {
+
+        let departments = [];
+
+        for( let i = 0; i < data.length; i++ ){
+      
+          departments.push(data[i].department_name);
+        }
+
+        if( departments.length > 0 ){
+
+          this.setState({
+            hasDepartment: true,
+            departmentOptions: departments
+          });
+        }
+        
+      })
+      .catch(err => console.log("API ERROR: ", err));
+  }
+
+
 
   idInputHandler = (e) => {
     this.setState({ emp_id: e.target.value });
@@ -36,13 +70,8 @@ class AddEmployeePage extends React.Component {
   };
 
   dpInputHandler = (e) => {
-    this.setState({ department: e.target.value });
+    this.setState({ department: e.value });
   }
-
-  supidInputHandler = (e) => {
-    this.setState({ sup_id: e.target.value });
-  }
-
 
   redirect = () => {
 
@@ -57,11 +86,13 @@ class AddEmployeePage extends React.Component {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(
-        { emp_id: this.state.emp_id, 
+        { 
+          emp_id: this.state.emp_id, 
           last_name: this.state.last, 
           first_name: this.state.first, 
           dob: this.state.dob, 
           rest_day: this.state.rest,
+          department: this.state.department
            })
     }).then(function(res){
       return res.json(); //error here
@@ -70,6 +101,20 @@ class AddEmployeePage extends React.Component {
     }).catch((error) => {
       console.log(error);
     });
+
+/*
+    await fetch('http://localhost:5000/api/employeeprofile', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(
+        { 
+          emp_id: this.state.emp_id, 
+          last_name: this.state.last, 
+          first_name: this.state.first, 
+          dob: this.state.dob, 
+          rest_day: this.state.rest,
+           })
+          });*/
   };
 
   render() {
@@ -84,7 +129,7 @@ class AddEmployeePage extends React.Component {
           <h1>Add a New Employee</h1>
           <br/>
           <form onSubmit={this.addEmpHandler}>
-              <label for='empid'>Emp ID</label>
+              <label htmlFor='empid'>Emp ID</label>
               <input 
                 placeholder="Emp ID..." id='empid' 
                 value={this.state.emp_id}
@@ -93,7 +138,7 @@ class AddEmployeePage extends React.Component {
               />
               <br/>
             
-              <label for='fn'>Last Name</label>
+              <label htmlFor='fn'>Last Name</label>
               <input 
                 placeholder="last name..." id='fn' 
                 value={this.state.last}
@@ -102,7 +147,7 @@ class AddEmployeePage extends React.Component {
               />
               <br/>
 
-              <label for='ln'>First Name</label>
+              <label htmlFor='ln'>First Name</label>
               <input 
                 placeholder="first name..." id='ln'
                 value={this.state.first}
@@ -120,25 +165,20 @@ class AddEmployeePage extends React.Component {
 
               <label>Rest Day</label>
               <Dropdown options={options} onChange={this.restInputHandler} 
-                value={this.state.rest} placeholder="Select an option" />
+                value={this.state.rest} placeholder="Select a Day" />
               <br/>
 
-              <label for='dp'>Department</label>
-              <input 
-                placeholder="department..." id='dp'
-                value={this.state.department}
-                onChange={this.dpInputHandler} 
-                required
-              />&nbsp;&nbsp;&nbsp;<a onClick={this.redirect}>Add New Department?</a>
-              <br/>
-
-              <label for='supid'>Supervisor id</label>
-              <input 
-                placeholder="supervisor id..." id='supid'
-                value={this.state.sup_id}
-                onChange={this.supidInputHandler} 
-                required
-              />
+              <label>Department</label>
+              
+              {this.state.hasDepartment &&
+                (<Dropdown options={this.state.departmentOptions} onChange={this.dpInputHandler} 
+                value={this.state.department} placeholder="Select a Department" />)}
+              
+              {!this.state.hasDepartment &&
+                (<div>
+                  <p>No Department found, Add New Department?</p><br/>
+                  <button className='btn btn-link' onClick={this.redirect}>New</button>
+                </div>)}
               <br/>
 
               <input type="submit" value="Add" />

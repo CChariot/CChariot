@@ -37,7 +37,7 @@ class AddDepartment extends React.Component {
     this.props.history.push('/add-employee')
   }
 
-  addEmpHandler = async(event) => {
+  addDepartment = async(event) => {
 
     event.preventDefault();
 
@@ -73,18 +73,14 @@ class AddDepartment extends React.Component {
 
   render() {
 
-    const options = [
-      '0', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
-    ];
-
     return (
       <div className="text-center">
         <div>
-          <h1>Add a New Employee</h1>
+          <h1>Add a New Department</h1>
           <br/>
-          <form onSubmit={this.addEmpHandler}>
+          <form onSubmit={this.addDepartment}>
                 
-                <label for='supid'>Supervisor id</label>
+                <label htmlFor='supid'>Supervisor id</label>
               
               <input 
                 placeholder="supervisor id..." id='supid'
@@ -94,14 +90,14 @@ class AddDepartment extends React.Component {
               />
               <br/>
 
-            <label for='dp'>Department Name</label>
+            <label htmlFor='dp'>Department Name</label>
               <input 
                 placeholder="department name..." id='dp'
                 value={this.state.departmentName}
                 onChange={this.dnInputHandler} 
                 required
               />
-                  <br/><a onClick={this.redirect}>Add New Employee to the department?</a>
+                  <br/><p onClick={this.redirect}>Add New Employee to the department?</p>
               <br/>
 
               <label>Oprating Hours</label>

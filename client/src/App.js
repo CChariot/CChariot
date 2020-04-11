@@ -28,16 +28,22 @@ function Navigation(props) {
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark shadow mb-3">
       <Link className="navbar-brand" to="/">Home</Link>
       <ul className="navbar-nav mr-auto">
+
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/employees">
+            Employees
+          </NavLink>
+        </li>
         
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/add-employee">
             Add New Employee
           </NavLink>
         </li>
-        
+
         <li className="nav-item">
-          <NavLink className="nav-link" exact to="/employees">
-            Employees
+          <NavLink className="nav-link" exact to="/add-department">
+            Add New Department
           </NavLink>
         </li>
         
