@@ -11,6 +11,12 @@ router.get("/:Request_ID", (req, res) => {
   });
 });
 
+router.get("/", (req, res) => {
+  Request.retrieveAll((respond) => {
+    return res.json(respond);
+  });
+});
+
 router.post("/", (req, res) => {
   var Request_ID = req.body.Request_ID;
   var Request_DATE = req.body.Request_DATE;

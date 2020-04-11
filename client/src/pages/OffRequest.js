@@ -4,8 +4,7 @@ export default class OffRequest extends Component {
 
     state = {
         message: '',
-        senderId: '',
-        senderFirstName: ''
+        senderId: ''
     }
 
     messageChangeHandler = (e) => {
@@ -21,27 +20,47 @@ export default class OffRequest extends Component {
     }
 
 
-    NameChangeHandler = (e) => {
-        this.setState({
-            senderFirstName: e.target.value
-        })
-    }
+    submitHandler = async() => {
 
+        const date = Date(Date.now() / 1000.0);
 
-    submitHandler = () => {
+        console.log(date)
 
-        console.log(this.state)
+        let id = Math.floor(100000000 + Math.random() * 900000000);
 
         let confirm = window.confirm('Are you sure to submit this request?');
 
         if( confirm ){
             
-            alert('Send!')
+            await fetch("http://localhost:5000/api/offrequest", 
+                {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(
+                        { 
+                            Request_ID: id, 
+                            Request_DATE: date, 
+                            Emp_ID: this.state.senderId, 
+                            Reason: this.state.message
+                        })
+                });
 
-            //do something in the api here
+            alert('Send!');
 
         }  
     }
+
+    checkout = async() => {
+
+        await fetch("http://localhost:5000/api/offrequest")
+            .then(res => res.json())
+            .then(data => {
+                
+                console.log(data);
+            
+            }).catch(err => console.log("API ERROR: ", err));
+    }
+
 
     render() {
         return (
@@ -61,16 +80,11 @@ export default class OffRequest extends Component {
                     type='text' value={this.state.senderId} 
                     onChange={this.IDChangeHandler}
                 />
-                    
-                <label>First Name:</label>
-                <input
-                    type='text' value={this.state.senderFirstName} 
-                    onChange={this.NameChangeHandler}
-                />
 
                 <br/>
                 <button onClick={this.submitHandler}>Send</button>
                 </div>
+                <button onClick={this.checkout}>check</button>
             </div>
         )
     }
