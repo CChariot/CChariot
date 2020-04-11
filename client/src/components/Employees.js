@@ -29,6 +29,10 @@ function EmployeeData(props){
                 Header: 'Rest Day',
                 accessor: 'rest_day',
               },
+              {
+                Header: 'Department',
+                accessor: 'department',
+              },
             ],
             [],
           )

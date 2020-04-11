@@ -18,6 +18,7 @@ import AboutUsPage from './pages/AboutUsPage';
 import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
+import AddDepartment from './components/AddDepartment';
 
 import './App.css';
 
@@ -27,16 +28,22 @@ function Navigation(props) {
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark shadow mb-3">
       <Link className="navbar-brand" to="/">Home</Link>
       <ul className="navbar-nav mr-auto">
+
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/employees">
+            Employees
+          </NavLink>
+        </li>
         
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/add-employee">
             Add New Employee
           </NavLink>
         </li>
-        
+
         <li className="nav-item">
-          <NavLink className="nav-link" exact to="/employees">
-            Employees
+          <NavLink className="nav-link" exact to="/add-department">
+            Add New Department
           </NavLink>
         </li>
         
@@ -66,6 +73,7 @@ class App extends React.Component {
             <div className="row justify-content-center">
               <Switch>
                 <AdminRoute path="/add-employee" component={AddEmployeePage} />
+                <AdminRoute path="/add-department" component={AddDepartment} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
                 <Route path='/emplogin' component={EmployeeLogin} />

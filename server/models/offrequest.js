@@ -1,6 +1,7 @@
 const db = require("../database");
 
 const select = "SELECT * from offrequest WHERE Request_ID = ($1)";
+const selectAll = "SELECT * from offrequest";
 
 class Request {
   static retrieve(values, callback) {
@@ -10,10 +11,17 @@ class Request {
     });
   }
 
-  static insert(Request_ID, Request_DATE, Emp_ID, callback) {
+  static retrieveAll(callback) {
+    db.query(selectAll, (err, res) => {
+      if (err.error) return callback(err);
+      callback(res);
+    });
+  }
+
+  static insert(Request_ID, Request_DATE, Emp_ID, Reason, callback) {
     db.query(
-      "INSERT INTO offrequest (Request_ID, Request_DATE, Emp_ID) VALUES ($1, $2, $3)",
-      [Request_ID, Request_DATE, Emp_ID],
+      "INSERT INTO offrequest (Request_ID, Request_DATE, Emp_ID, Reason) VALUES ($1, $2, $3, $4)",
+      [Request_ID, Request_DATE, Emp_ID, Reason],
       (err, res) => {
         if (err.error) return callback(err);
         callback(res);

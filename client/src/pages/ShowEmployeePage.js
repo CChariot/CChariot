@@ -11,10 +11,10 @@ class ShowEmployeePage extends React.Component {
     }
   
     componentDidMount() {
-      this.getEmpHandler();
+      this.getAllEmpHandler();
     }
     
-    getEmpHandler = async() => {
+    getAllEmpHandler = async() => {
       
       await fetch("http://localhost:5000/api/employees")
         .then(res => res.json())
@@ -23,8 +23,7 @@ class ShowEmployeePage extends React.Component {
           for( let i = 0; i < data.length; i++ ){
             
             data[i].dob = data[i].dob.split("T")[0];
-            
-            data[i].rest_day = data[i].rest_day.split("T")[0]
+          
           }
 
           this.setState({
