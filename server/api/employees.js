@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
   var dob = req.body.dob;
   var rest_day = req.body.rest_day;
   var department = req.body.department;
+  var hourly_rate = req.body.hourly_rate;
 
   Employees.insert(
     emp_id,
@@ -32,10 +33,19 @@ router.post("/", (req, res) => {
     dob,
     rest_day,
     department,
+    hourly_rate,
     (respond) => {
       return res.json(respond);
     }
   );
+});
+
+router.post("/", (req, res) => {
+  var Emp_ID = req.body.Emp_ID;
+
+  Employees.drop(Emp_ID, (respond) => {
+    return res.json(respond);
+  });
 });
 
 module.exports = router;

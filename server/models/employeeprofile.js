@@ -1,6 +1,7 @@
 const db = require("../database");
 
-const select = "SELECT * from employees_profile WHERE Emp_ID = ($1)";
+const select =
+  "SELECT Emp_ID, Sup_ID, department_name, hourly_rate FROM employees JOIN department ON employees.department = department.department_name AND Emp_ID = ($1)";
 
 class Employeeprofile {
   static retrieve(values, callback) {
