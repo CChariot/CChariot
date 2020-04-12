@@ -32,8 +32,8 @@ CREATE TABLE offrequest (
 );
 
 INSERT INTO employees VALUES
-	(123456789, 'Dalao', 'Bida', '1996-04-10', 'Monday', 'Subway'),
-	(321435234, 'Caiji', 'Runmin', '1996-04-10', 'Sunday', 'Bus');
+	(123456789, 'Dalao', 'Bida', '1996-04-10', 'Monday', 'Subway', 20),
+	(321435234, 'Caiji', 'Runmin', '1996-04-10', 'Sunday', 'Bus', 15);
 
 INSERT INTO department VALUES
 	(213213, 'Bus', '10:30 to 18:30'),

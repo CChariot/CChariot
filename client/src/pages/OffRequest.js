@@ -48,17 +48,6 @@ export default class OffRequest extends Component {
         }  
     }
 
-    checkout = async() => {
-
-        await fetch("http://localhost:5000/api/offrequest")
-            .then(res => res.json())
-            .then(data => {
-                
-                console.log(data);
-            
-            }).catch(err => console.log("API ERROR: ", err));
-    }
-
 
     render() {
         return (
@@ -82,7 +71,6 @@ export default class OffRequest extends Component {
                 <br/>
                 <button onClick={this.submitHandler}>Send</button>
                 </div>
-                <button onClick={this.checkout}>check</button>
             </div>
         )
     }

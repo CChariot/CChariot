@@ -19,6 +19,7 @@ import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
 import AddDepartment from './components/AddDepartment';
+import CheckinPage from './pages/CheckinPage';
 
 import './App.css';
 
@@ -52,6 +53,12 @@ function Navigation(props) {
             Requst Dayoff
           </NavLink>
         </li>
+
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/check">
+            Check In
+          </NavLink>
+        </li>
         
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/about-us">
@@ -76,6 +83,7 @@ class App extends React.Component {
                 <AdminRoute path="/add-department" component={AddDepartment} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
+                <EmpRoute path="/check" component={CheckinPage} />
                 <Route path='/emplogin' component={EmployeeLogin} />
                 <Route path='/adminlogin' component={AdminLogin} />
                 <Route path="/about-us" component={AboutUsPage} />

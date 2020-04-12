@@ -33,6 +33,10 @@ function EmployeeData(props){
                 Header: 'Department',
                 accessor: 'department',
               },
+              {
+                Header: 'Hourly Pay Rate $',
+                accessor: 'hourly_rate',
+              },
             ],
             [],
           )
