@@ -66,7 +66,7 @@ class AddDepartment extends React.Component {
     }
 
     else{
-        alert('Please provide with valid oprating hours!')
+        alert('Please provide with valid operating hours!')
     }
 
   };
