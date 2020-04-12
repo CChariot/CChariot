@@ -22,14 +22,18 @@ router.post("/", (req, res) => {
   var department_name = req.body.department_name;
   var operating_hour = req.body.operating_hour;
 
-  Departments.insert(
-    Sup_id,
-    department_name,
-    operating_hour,
-    (respond) => {
-      return res.json(respond);
-    }
-  );
+  Departments.insert(Sup_id, department_name, operating_hour, (respond) => {
+    return res.json(respond);
+  });
+});
+
+router.post("/update", (req, res) => {
+  var newsup_id = req.body.newsup_id;
+  var oldsup_id = req.body.oldsup_id;
+
+  Departments.alter(newsup_id, oldsup_id, (respond) => {
+    return res.json(respond);
+  });
 });
 
 module.exports = router;

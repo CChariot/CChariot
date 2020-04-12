@@ -38,7 +38,7 @@ class Employees {
     );
   }
 
-  static drop(emp_id) {
+  static drop(emp_id, callback) {
     db.query(
       "DELETE FROM employees WHERE Emp_ID = ($1)",
       [emp_id],
