@@ -14,7 +14,8 @@ class AddEmployeePage extends React.Component {
     department: '',
     sup_id: '123',
     hasDepartment: false,
-    departmentOptions: []
+    departmentOptions: [],
+    hourly_rate:''
   }
 
   componentDidMount = () =>{
@@ -73,6 +74,10 @@ class AddEmployeePage extends React.Component {
     this.setState({ department: e.value });
   }
 
+  hourlyRateInputHandler = (e) => {
+    this.setState({ hourly_rate: e.target.value });
+  };
+
   redirect = () => {
 
     this.props.history.push('/add-department')
@@ -92,7 +97,8 @@ class AddEmployeePage extends React.Component {
           first_name: this.state.first, 
           dob: this.state.dob, 
           rest_day: this.state.rest,
-          department: this.state.department
+          department: this.state.department,
+          hourly_rate: this.state.hourly_rate
            })
     }).then(function(res){
       return res.json(); //error here
@@ -138,20 +144,28 @@ class AddEmployeePage extends React.Component {
               />
               <br/>
             
-              <label htmlFor='fn'>Last Name</label>
+              <label htmlFor='ln'>Last Name</label>
               <input 
-                placeholder="last name..." id='fn' 
+                placeholder="last name..." id='ln' 
                 value={this.state.last}
                 onChange={this.lastInputHandler} 
                 required
               />
               <br/>
 
-              <label htmlFor='ln'>First Name</label>
+              <label htmlFor='fn'>First Name</label>
               <input 
-                placeholder="first name..." id='ln'
+                placeholder="first name..." id='fn'
                 value={this.state.first}
                 onChange={this.firstInputHandler} 
+                required
+              />
+              <br/>
+              <label htmlFor='hr'>Hourly Rate</label>
+              <input 
+                placeholder="$" id='hr'
+                value={this.state.hourly_rate}
+                onChange={this.hourlyRateInputHandler}
                 required
               />
               <br/>
