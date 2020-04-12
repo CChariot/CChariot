@@ -13,6 +13,7 @@ class AddEmployeePage extends React.Component {
     rest: '',
     department: '',
     sup_id: '123',
+    payrate: 12,
     hasDepartment: false,
     departmentOptions: []
   }
@@ -73,6 +74,10 @@ class AddEmployeePage extends React.Component {
     this.setState({ department: e.value });
   }
 
+  payrateInputHandler = (e) => {
+    this.setState({ payrate: e.target.value })
+  }
+
   redirect = () => {
 
     this.props.history.push('/add-department')
@@ -92,7 +97,8 @@ class AddEmployeePage extends React.Component {
           first_name: this.state.first, 
           dob: this.state.dob, 
           rest_day: this.state.rest,
-          department: this.state.department
+          department: this.state.department,
+          hourly_rate: this.state.payrate
            })
     }).then(function(res){
       return res.json(); //error here
@@ -102,19 +108,6 @@ class AddEmployeePage extends React.Component {
       console.log(error);
     });
 
-/*
-    await fetch('http://localhost:5000/api/employeeprofile', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(
-        { 
-          emp_id: this.state.emp_id, 
-          last_name: this.state.last, 
-          first_name: this.state.first, 
-          dob: this.state.dob, 
-          rest_day: this.state.rest,
-           })
-          });*/
   };
 
   render() {
@@ -179,6 +172,14 @@ class AddEmployeePage extends React.Component {
                   <p>No Department found, Add New Department?</p><br/>
                   <button className='btn btn-link' onClick={this.redirect}>New</button>
                 </div>)}
+              <br/>
+
+              <label>Hourly Pay Rate</label>
+              <input 
+                placeholder="Hourly pay rate..." 
+                value={this.state.payrate} 
+                type="number" 
+                onChange={this.payrateInputHandler} required/>
               <br/>
 
               <input type="submit" value="Add" />

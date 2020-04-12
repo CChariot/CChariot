@@ -5,7 +5,8 @@ CREATE TABLE employees
 	first_name VARCHAR(50) NOT NULL,
 	dob DATE NOT NULL,
 	rest_day VARCHAR(50) NOT NULL,
-	department VARCHAR(50) NOT NULL
+	department VARCHAR(50) NOT NULL,
+	hourly_rate INT NOT NULL
 );
 
 CREATE TABLE department
