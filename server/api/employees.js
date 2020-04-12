@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
   );
 });
 
-router.post("/", (req, res) => {
+router.post("/delete", (req, res) => {
   var Emp_ID = req.body.Emp_ID;
 
   Employees.drop(Emp_ID, (respond) => {
