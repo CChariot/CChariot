@@ -15,8 +15,10 @@ class ShowEmployeePage extends React.Component {
       data: null,
       modalStatAdd:false,
       modalStatDelete:false,
+      modalStatEdit:false,
       modalExist:false,
       modalNotExist:false,
+      modalNotExistEdit:false,
       emp_id:'',
       last: '',
       first: '',
@@ -133,6 +135,23 @@ class ShowEmployeePage extends React.Component {
         console.log(this.state.data);
         this.getDeparmentInfo();
     }
+    getEmpHandler = async() => {
+      for( let i = 0; i < this.state.data.length; i++ ){
+        if(this.state.emp_id == this.state.data[i].emp_id)
+        {
+          this.setState({
+            last:this.state.data[i].last_name,
+            first:this.state.data[i].first_name,
+            hourly_rate:this.state.data[i].hourly_rate,
+            department:this.state.data[i].department,
+            rest:this.state.data[i].rest_day
+          })
+          break;
+        }
+        else if(i+1 == this.state.data.length){this.changeModalNotExistEdit();return;}
+        else continue;
+      }
+    }
     addEmpHandler = async(event) => {
       for( let i = 0; i < this.state.data.length; i++ ){
         if(this.state.emp_id == this.state.data[i].emp_id){this.changeModalExist();return;}
@@ -160,6 +179,32 @@ class ShowEmployeePage extends React.Component {
       });
       this.changeModalStatAdd();
     }
+    editEmpHandler = async(event) => {
+
+      event.preventDefault();
+  
+      await fetch('http://localhost:5000/api/employees/update', {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(
+          { 
+            emp_id: this.state.emp_id, 
+            last_name: this.state.last, 
+            first_name: this.state.first, 
+            dob: this.state.dob, 
+            rest_day: this.state.rest,
+            department: this.state.department,
+            hourly_rate: this.state.hourly_rate
+             })
+      }).then(function(res){
+        return res.json(); //error here
+      }).then(function(data){
+        console.log(data);
+      }).catch((error) => {
+        console.log(error);
+      });
+      this.changeModalStatEdit();
+    }
     changeModalStatAdd = () =>
     {
       this.setState({modalStatAdd:!this.state.modalStatAdd});
@@ -175,6 +220,14 @@ class ShowEmployeePage extends React.Component {
     changeModalNotExist = () =>
     {
       this.setState({modalNotExist:!this.state.modalNotExist});
+    }   
+    changeModalNotExistEdit = () =>
+    {
+      this.setState({modalNotExistEdit:!this.state.modalNotExistEdit});
+    }
+    changeModalStatEdit = () =>
+    {
+      this.setState({modalStatEdit:!this.state.modalStatEdit});
     }
     render() {
       if(this.state.loading) {
@@ -289,6 +342,70 @@ class ShowEmployeePage extends React.Component {
               </Modal.Footer>
           </Modal>
 
+          <Button variant ='primary' onClick = {this.changeModalStatEdit}>Edit a Employee</Button>{' '}
+          <Modal show = {this.state.modalStatEdit}
+          centered>
+            <Modal.Header closeButton onClick={this.changeModalStatEdit}>Edit Employee</Modal.Header>
+              <Modal.Body>
+              <label htmlFor='empid'>Employee id</label>
+              <input 
+                placeholder="Emp ID..." id='empid' 
+                value={this.state.emp_id}
+                onChange={this.idInputHandler} 
+                required
+              />
+              <br/>
+            
+              <label htmlFor='ln'>Last Name</label>
+              <input 
+                placeholder={this.state.last} id='ln' 
+                value={this.state.last}
+                onChange={this.lastInputHandler} 
+                required
+              />
+              <br/>
+
+              <label htmlFor='fn'>First Name</label>
+              <input 
+                placeholder="first name..." id='fn'
+                value={this.state.first}
+                onChange={this.firstInputHandler} 
+                required
+              />
+              <br/>
+              <label htmlFor='hr'>Hourly Rate</label>
+              <input 
+                placeholder="$" id='hr'
+                value={this.state.hourly_rate}
+                onChange={this.hourlyRateInputHandler}
+                required
+              />
+              <br/>
+
+              <label>Rest Day</label>
+              <Dropdown options={options} onChange={this.restInputHandler} 
+                value={this.state.rest} placeholder="Select a Day" />
+              <br/>
+
+              <label>Department</label>
+              
+              {this.state.hasDepartment &&
+                (<Dropdown options={this.state.departmentOptions} onChange={this.dpInputHandler} 
+                value={this.state.department} placeholder="Select a Department" />)}
+              
+              {!this.state.hasDepartment &&
+                (<div>
+                  <p>No Department found, Add New Department?</p><br/>
+                  <button className='btn btn-link' onClick={this.redirect}>New</button>
+                </div>)}
+              <br/>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant='primary' onClick ={this.getEmpHandler}>Get INFO</Button>
+                <Button variant='primary' onClick ={this.editEmpHandler}>Save</Button>
+                <Button variant='secondary' onClick ={this.changeModalStatEdit}>Cancel</Button>
+              </Modal.Footer>
+          </Modal>
           <Modal show = {this.state.modalExist}
           centered
           size='sm'>
@@ -310,6 +427,18 @@ class ShowEmployeePage extends React.Component {
               </Modal.Body>
               <Modal.Footer>
                 <Button variant='primary' onClick ={this.changeModalNotExist}>OK</Button>
+              </Modal.Footer>
+          </Modal>
+
+          <Modal show = {this.state.modalNotExistEdit}
+          centered
+          size='sm'>
+            <Modal.Header >Failed</Modal.Header>
+              <Modal.Body>
+                Emp_ID does not exist!
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant='primary' onClick ={this.changeModalNotExistEdit}>OK</Button>
               </Modal.Footer>
           </Modal>
         </div>

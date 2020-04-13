@@ -19,8 +19,6 @@ import AboutUsPage from './pages/AboutUsPage';
 import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
-import AddDepartment from './pages/AddDepartment';
-import EditEmployee from './components/EditEmployee';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -69,10 +67,8 @@ class App extends React.Component {
             <div className="row justify-content-center">
               <Switch>
                 <AdminRoute path="/add-employee" component={AddEmployeePage} />
-                <AdminRoute path="/add-department" component={AddDepartment} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
                 <ProtectedRoute path="/departments" component={ShowDepartmentPage} />
-                <ProtectedRoute path="/edit-employee" component={EditEmployee} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
                 <Route path='/emplogin' component={EmployeeLogin} />
                 <Route path='/adminlogin' component={AdminLogin} />
