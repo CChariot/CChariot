@@ -15,6 +15,8 @@ class ShowEmployeePage extends React.Component {
       data: null,
       modalStatAdd:false,
       modalStatDelete:false,
+      modalExist:false,
+      modalNotExist:false,
       emp_id:'',
       last: '',
       first: '',
@@ -86,7 +88,11 @@ class ShowEmployeePage extends React.Component {
         .catch(err => console.log("API ERROR: ", err));
     }
     removeEmpHandler = async(event) => {
-
+      for( let i = 0; i < this.state.data.length; i++ ){
+        if(this.state.emp_id == this.state.data[i].emp_id){break;}
+        else if(i+1 == this.state.data.length){this.changeModalNotExist();return;}
+        else continue;
+      }
       event.preventDefault();
   
       await fetch('http://localhost:5000/api/employees/delete', {
@@ -124,13 +130,14 @@ class ShowEmployeePage extends React.Component {
           
         })
         .catch(err => console.log("API ERROR: ", err));
-      console.log(this.state.data);
+        console.log(this.state.data);
         this.getDeparmentInfo();
     }
     addEmpHandler = async(event) => {
-
+      for( let i = 0; i < this.state.data.length; i++ ){
+        if(this.state.emp_id == this.state.data[i].emp_id){this.changeModalExist();return;}
+      }
       event.preventDefault();
-  
       await fetch('http://localhost:5000/api/employees', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -161,6 +168,14 @@ class ShowEmployeePage extends React.Component {
     {
       this.setState({modalStatDelete:!this.state.modalStatDelete});
     }
+    changeModalExist = () =>
+    {
+      this.setState({modalExist:!this.state.modalExist});
+    }
+    changeModalNotExist = () =>
+    {
+      this.setState({modalNotExist:!this.state.modalNotExist});
+    }
     render() {
       if(this.state.loading) {
         return <Loading />;
@@ -190,7 +205,6 @@ class ShowEmployeePage extends React.Component {
             <Modal.Header closeButton onClick={this.changeModalStatAdd}>Add Employee</Modal.Header>
               <Modal.Body>
               <label htmlFor='empid'>Employee id</label>
-              <label htmlFor='empid'>Emp ID</label>
               <input 
                 placeholder="Emp ID..." id='empid' 
                 value={this.state.emp_id}
@@ -272,6 +286,30 @@ class ShowEmployeePage extends React.Component {
               <Modal.Footer>
                 <Button variant='primary' onClick ={this.removeEmpHandler}>Delete</Button>
                 <Button variant='secondary' onClick ={this.changeModalStatDelete}>Cancel</Button>
+              </Modal.Footer>
+          </Modal>
+
+          <Modal show = {this.state.modalExist}
+          centered
+          size='sm'>
+            <Modal.Header >Failed</Modal.Header>
+              <Modal.Body>
+                Emp_ID already exist!
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant='primary' onClick ={this.changeModalExist}>OK</Button>
+              </Modal.Footer>
+          </Modal>
+
+          <Modal show = {this.state.modalNotExist}
+          centered
+          size='sm'>
+            <Modal.Header >Failed</Modal.Header>
+              <Modal.Body>
+                Emp_ID does not exist!
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant='primary' onClick ={this.changeModalNotExist}>OK</Button>
               </Modal.Footer>
           </Modal>
         </div>
