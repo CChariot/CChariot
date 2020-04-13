@@ -100,7 +100,7 @@ class AddDepartment extends React.Component {
                   <br/><p onClick={this.redirect}>Add New Employee to the department?</p>
               <br/>
 
-              <label>Oprating Hours</label>
+              <label>Operating Hours</label>
               <br/>From&nbsp;;&nbsp;
               <TimePicker
                 onChange={this.shoursinputHandler}

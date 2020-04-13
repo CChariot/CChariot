@@ -39,6 +39,16 @@ class Departments {
       }
     );
   }
+  static drop(department_name, callback) {
+    db.query(
+      "DELETE FROM department WHERE department_name = ($1)",
+      [department_name],
+      (err, res) => {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 
 module.exports = Departments;

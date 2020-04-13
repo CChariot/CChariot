@@ -35,5 +35,12 @@ router.post("/update", (req, res) => {
     return res.json(respond);
   });
 });
+router.post("/delete", (req, res) => {
+  var department_name = req.body.department_name;
+
+  Departments.drop(department_name, (respond) => {
+    return res.json(respond);
+  });
+});
 
 module.exports = router;

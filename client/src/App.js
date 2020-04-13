@@ -20,6 +20,7 @@ import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
 import AddDepartment from './pages/AddDepartment';
+import EditEmployee from './components/EditEmployee';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -39,18 +40,6 @@ function Navigation(props) {
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/departments">
             Department
-          </NavLink>
-        </li>
-        
-        <li className="nav-item">
-          <NavLink className="nav-link" exact to="/add-employee">
-            Add New Employee
-          </NavLink>
-        </li>
-
-        <li className="nav-item">
-          <NavLink className="nav-link" exact to="/add-department">
-            Add New Department
           </NavLink>
         </li>
         
@@ -83,6 +72,7 @@ class App extends React.Component {
                 <AdminRoute path="/add-department" component={AddDepartment} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
                 <ProtectedRoute path="/departments" component={ShowDepartmentPage} />
+                <ProtectedRoute path="/edit-employee" component={EditEmployee} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
                 <Route path='/emplogin' component={EmployeeLogin} />
                 <Route path='/adminlogin' component={AdminLogin} />
