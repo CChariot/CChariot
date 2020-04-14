@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import auth from "../auth/auth";
 class ShowEmployeePage extends React.Component {
     
     state = {
@@ -207,11 +208,14 @@ class ShowEmployeePage extends React.Component {
     }
     changeModalStatAdd = () =>
     {
+      console.log(this.adminCheck());
       this.setState({modalStatAdd:!this.state.modalStatAdd});
+      this.resetInfo();
     }
     changeModalStatDelete = () =>
     {
       this.setState({modalStatDelete:!this.state.modalStatDelete});
+      this.resetInfo();
     }
     changeModalExist = () =>
     {
@@ -220,14 +224,32 @@ class ShowEmployeePage extends React.Component {
     changeModalNotExist = () =>
     {
       this.setState({modalNotExist:!this.state.modalNotExist});
+      this.resetInfo();
     }   
     changeModalNotExistEdit = () =>
     {
       this.setState({modalNotExistEdit:!this.state.modalNotExistEdit});
+      this.resetInfo();
     }
     changeModalStatEdit = () =>
     {
       this.setState({modalStatEdit:!this.state.modalStatEdit});
+      this.resetInfo();
+    }
+    resetInfo =() =>{
+      this.setState({
+        emp_id:'',
+        last:'',
+        first:'',
+        hourly_rate:'',
+        department:'',
+        rest:''
+      })
+    }    
+    adminCheck = () =>
+    {
+      if(auth.usertype=="admin")return true;
+      return false;
     }
     render() {
       if(this.state.loading) {
@@ -252,10 +274,11 @@ class ShowEmployeePage extends React.Component {
           <br/>
           <EmployeeData empdata={this.state.data}/>
           <br/>
-          <Button variant ='primary' onClick = {this.changeModalStatAdd}>Add Employee</Button>{' '}
+          <Button disabled = {!this.adminCheck()} variant ='primary' onClick = {this.changeModalStatAdd}>Add Employee</Button>{' '}
           <Modal show = {this.state.modalStatAdd}
-          centered>
-            <Modal.Header closeButton onClick={this.changeModalStatAdd}>Add Employee</Modal.Header>
+          centered
+          onHide={this.changeModalStatAdd}>
+            <Modal.Header closeButton >Add Employee</Modal.Header>
               <Modal.Body>
               <label htmlFor='empid'>Employee id</label>
               <input 
@@ -323,10 +346,11 @@ class ShowEmployeePage extends React.Component {
               </Modal.Footer>
           </Modal>
 
-          <Button variant ='danger' onClick = {this.changeModalStatDelete}>Delete</Button>{' '}
+          <Button disabled ={!this.adminCheck()} variant ='danger' onClick = {this.changeModalStatDelete}>Delete</Button>{' '}
           <Modal show = {this.state.modalStatDelete}
-          centered>
-            <Modal.Header closeButton onClick={this.changeModalStatDelete}>Delete Employee</Modal.Header>
+          centered
+          onHide={this.changeModalStatDelete}>
+            <Modal.Header closeButton >Delete Employee</Modal.Header>
               <Modal.Body>
               <label htmlFor='empid'>Employee id</label>
               <input 
@@ -342,10 +366,11 @@ class ShowEmployeePage extends React.Component {
               </Modal.Footer>
           </Modal>
 
-          <Button variant ='primary' onClick = {this.changeModalStatEdit}>Edit a Employee</Button>{' '}
+          <Button disabled ={!this.adminCheck()} variant ='primary' onClick = {this.changeModalStatEdit}>Edit a Employee</Button>{' '}
           <Modal show = {this.state.modalStatEdit}
-          centered>
-            <Modal.Header closeButton onClick={this.changeModalStatEdit}>Edit Employee</Modal.Header>
+          centered
+          onHide={this.changeModalStatEdit}>
+            <Modal.Header closeButton >Edit Employee</Modal.Header>
               <Modal.Body>
               <label htmlFor='empid'>Employee id</label>
               <input 
@@ -401,7 +426,7 @@ class ShowEmployeePage extends React.Component {
               <br/>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant='primary' onClick ={this.getEmpHandler}>Get INFO</Button>
+                <Button variant='primary' onClick ={this.getEmpHandler}>Get Employee Info</Button>
                 <Button variant='primary' onClick ={this.editEmpHandler}>Save</Button>
                 <Button variant='secondary' onClick ={this.changeModalStatEdit}>Cancel</Button>
               </Modal.Footer>

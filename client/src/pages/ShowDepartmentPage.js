@@ -5,6 +5,7 @@ import DepartmentData from '../components/Departments';
 import {Link} from 'react-router-dom';
 import {Modal, Button} from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
+import auth from '../auth/auth'
 
 class ShowDepartmentPage extends React.Component {
     
@@ -132,6 +133,11 @@ class ShowDepartmentPage extends React.Component {
       });
       this.changeModalStatDelete();
     };
+    adminCheck = () =>
+    {
+      if(auth.usertype=="admin")return true;
+      return false;
+    }
     render() {
 
       if(this.state.loading) {
@@ -154,10 +160,11 @@ class ShowDepartmentPage extends React.Component {
           <DepartmentData depdata={this.state.data}/>
           <br/>
 
-          <Button variant ='primary' onClick = {this.changeModalStatAdd}>Add Department</Button>{' '}
+          <Button disabled = {!this.adminCheck()} variant ='primary' onClick = {this.changeModalStatAdd}>Add Department</Button>{' '}
           <Modal show = {this.state.modalStatAdd}
-          centered>
-            <Modal.Header closeButton onClick={this.changeModalStatAdd}>Add Department</Modal.Header>
+          centered
+          onHide={this.changeModalStatAdd}>
+            <Modal.Header closeButton >Add Department</Modal.Header>
               <Modal.Body>
               <label htmlFor='supid'>Supervisor id</label>
               
@@ -197,10 +204,12 @@ class ShowDepartmentPage extends React.Component {
               </Modal.Footer>
           </Modal>
           
-          <Button variant ='danger' onClick = {this.changeModalStatDelete}>Delete</Button>{' '}
+          <Button disabled = {!this.adminCheck()} variant ='danger' onClick = {this.changeModalStatDelete}>Delete</Button>{' '}
           <Modal show = {this.state.modalStatDelete}
-          centered>
-            <Modal.Header closeButton onClick={this.changeModalStatDelete}>Delete Department</Modal.Header>
+          centered
+          onHide={this.changeModalStatDelete}
+          >
+            <Modal.Header closeButton >Delete Department</Modal.Header>
               <Modal.Body>
               <label htmlFor='supid'>Department Name</label>
               <input 
@@ -215,6 +224,7 @@ class ShowDepartmentPage extends React.Component {
                 <Button variant='secondary' onClick ={this.changeModalStatDelete}>Cancel</Button>
               </Modal.Footer>
           </Modal>
+          
         </div>
       );
     }
