@@ -392,7 +392,7 @@ class ShowEmployeePage extends React.Component {
 
               <label htmlFor='fn'>First Name</label>
               <input 
-                placeholder="first name..." id='fn'
+                placeholder="" id='fn'
                 value={this.state.first}
                 onChange={this.firstInputHandler} 
                 required
@@ -400,7 +400,7 @@ class ShowEmployeePage extends React.Component {
               <br/>
               <label htmlFor='hr'>Hourly Rate</label>
               <input 
-                placeholder="$" id='hr'
+                placeholder="" id='hr'
                 value={this.state.hourly_rate}
                 onChange={this.hourlyRateInputHandler}
                 required

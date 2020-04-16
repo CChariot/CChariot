@@ -22,7 +22,7 @@ export default class OffRequest extends Component {
 
     submitHandler = async() => {
 
-        const date = new Date(Date.now()).toISOString().replace('T',' ').replace('Z','');
+        const date = new Date(Date.now());
 
         let id = Math.floor(100000000 + Math.random() * 900000000);
 

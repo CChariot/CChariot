@@ -19,6 +19,7 @@ import AboutUsPage from './pages/AboutUsPage';
 import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
+import ShowOffRequestPage from './pages/ShowOffRequestPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -43,10 +44,15 @@ function Navigation(props) {
         
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/offrequest">
-            Requst Dayoff
+            Requst
           </NavLink>
         </li>
-        
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/offrequest-table">
+            Requst
+          </NavLink>
+        </li>
+
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/about-us">
             About Us
@@ -57,7 +63,6 @@ function Navigation(props) {
   );
 }
 
-
 class App extends React.Component {
   render() {
     return (
@@ -67,6 +72,7 @@ class App extends React.Component {
             <div className="row justify-content-center">
               <Switch>
                 <AdminRoute path="/add-employee" component={AddEmployeePage} />
+                <AdminRoute path="/offrequest-table" component={ShowOffRequestPage} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
                 <ProtectedRoute path="/departments" component={ShowDepartmentPage} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
