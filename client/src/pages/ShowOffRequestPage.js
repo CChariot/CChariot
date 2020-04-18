@@ -37,7 +37,7 @@ class ShowOffRequestPage extends React.Component {
 
           for( let i = 0; i < data.length; i++ ){
             
-            data[i].reason = data[i].reason.split("T")[0];
+            data[i].request_date = data[i].request_date.split("T")[0];
           
           }
 

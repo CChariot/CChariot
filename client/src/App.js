@@ -19,6 +19,9 @@ import AboutUsPage from './pages/AboutUsPage';
 import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
+import CheckinPage from './pages/CheckinPage';
+import ShowAttendance from './pages/ShowAttendance';
+
 import ShowOffRequestPage from './pages/ShowOffRequestPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -44,12 +47,25 @@ function Navigation(props) {
         
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/offrequest">
-            Requst
+            Send Off Requst
           </NavLink>
         </li>
+
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/check">
+            Check In
+          </NavLink>
+        </li>
+        
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/offrequest-table">
-            Requst
+            Check Off Requst
+          </NavLink>
+        </li>
+
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/attendancetable">
+            Attendance
           </NavLink>
         </li>
 
@@ -75,7 +91,9 @@ class App extends React.Component {
                 <AdminRoute path="/offrequest-table" component={ShowOffRequestPage} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
                 <ProtectedRoute path="/departments" component={ShowDepartmentPage} />
+                <AdminRoute path="/attendancetable" component={ShowAttendance} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
+                <ProtectedRoute path="/check" component={CheckinPage} />
                 <Route path='/emplogin' component={EmployeeLogin} />
                 <Route path='/adminlogin' component={AdminLogin} />
                 <Route path="/about-us" component={AboutUsPage} />

@@ -31,6 +31,7 @@ app.use("/api/employees", require("./api/employees"));
 app.use("/api/departments", require("./api/departments"));
 app.use("/api/employeeprofile", require("./api/employeeprofile"));
 app.use("/api/offrequest", require("./api/offrequest"));
+app.use("/api/attendance", require("./api/attendance"));
 
 if (ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
