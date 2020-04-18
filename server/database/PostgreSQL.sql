@@ -38,3 +38,13 @@ INSERT INTO employees VALUES
 INSERT INTO department VALUES
 	(213213, 'Bus', '10:30 to 18:30'),
 	(438438, 'Subway', '9:30 to 17:30');
+
+
+CREATE TABLE attendance (
+	Att_Date DATE,
+	Emp_ID INT PRIMARY KEY,
+	Check_in VARCHAR(25),
+	Check_out VARCHAR(25),
+	Lunch_out VARCHAR(25),
+	Lunch_back VARCHAR(25)
+);
