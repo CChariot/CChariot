@@ -42,9 +42,10 @@ INSERT INTO department VALUES
 
 CREATE TABLE attendance (
 	Att_Date DATE,
-	Emp_ID INT PRIMARY KEY,
+	Emp_ID INT,
 	Check_in VARCHAR(25),
 	Check_out VARCHAR(25),
 	Lunch_out VARCHAR(25),
-	Lunch_back VARCHAR(25)
+	Lunch_back VARCHAR(25),
+	PRIMARY KEY( Att_Date, Emp_ID )
 );

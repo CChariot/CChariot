@@ -86,76 +86,81 @@ export default class CheckinPage extends Component {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
-              { 
-                /**/ 
-                 })
-          }).then(function(res){
-            return res.json(); //error here
-          }).then(function(data){
-            console.log(data);
-          }).catch((error) => {
-            console.log(error);
-          });
+                { 
+                    date: date,
+                    Emp_ID: empid,
+                    checkin: time
+                })
+            }).then(function(res){
+                return res.json(); //error here
+            }).then(function(data){
+                console.log(data);
+            }).catch((error) => {
+                console.log(error);
+            });
     }
 
 
     //check out
-    checkOutHandler = async( empid, date, time ) => {
+    checkOutHandler = async( empid, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/${empid}`, {
+        await fetch(`http://localhost:5000/api/attendance/checkout`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
-              { 
-                /**/ 
-                 })
-          }).then(function(res){
-            return res.json(); //error here
-          }).then(function(data){
-            console.log(data);
-          }).catch((error) => {
+                { 
+                    Emp_ID: empid,
+                    checkout: time
+                })
+            }).then(function(res){
+                return res.json(); //error here
+            }).then(function(data){
+                console.log(data);
+            }).catch((error) => {
             console.log(error);
-          });
+            });
     }
 
 
     //lunch out
-    lunchOutHandler = async( empid, date, time ) => {
+    lunchOutHandler = async( empid, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/${empid}`, {
+        await fetch(`http://localhost:5000/api/attendance/lunchout`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
-              { 
-                /**/ 
-                 })
-          }).then(function(res){
-            return res.json(); //error here
-          }).then(function(data){
-            console.log(data);
-          }).catch((error) => {
+                { 
+                    Emp_ID: empid,
+                    lunchout: time
+                })
+            }).then(function(res){
+                return res.json(); //error here
+            }).then(function(data){
+                console.log(data);
+            }).catch((error) => {
             console.log(error);
-          });
+            });
     }
 
 
     //check in 
-    lunchBackHandler = async( empid, date, time ) => {
+    lunchBackHandler = async( empid, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/${empid}`, {
+        await fetch(`http://localhost:5000/api/attendance/lunchback`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
-              { 
-                /**/ 
-                 })
-          }).then(function(res){
-            return res.json(); //error here
-          }).then(function(data){
-            console.log(data);
-          }).catch((error) => {
+                { 
+                    Emp_ID: empid,
+                    lunchback: time
+                })
+            }).then(function(res){
+                return res.json(); //error here
+            }).then(function(data){
+                console.log(data);
+            }).catch((error) => {
             console.log(error);
-          });
+            });
     }
 
 
@@ -173,15 +178,15 @@ export default class CheckinPage extends Component {
                 break;
             
             case 'checkout' :
-                this.checkOutHandler(this.state.empid, date, currenttime);
+                this.checkOutHandler(this.state.empid, currenttime);
                 break;
             
             case 'lunchout' :
-                this.lunchOutHandler(this.state.empid, date, currenttime);
+                this.lunchOutHandler(this.state.empid, currenttime);
                 break;
 
             case 'lunchback' :
-                this.lunchBackHandler(this.state.empid, date, currenttime);
+                this.lunchBackHandler(this.state.empid, currenttime);
                 break;
             
             default:
