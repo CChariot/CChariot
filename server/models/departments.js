@@ -28,6 +28,27 @@ class Departments {
       }
     );
   }
+
+  static alter(newsup_id, oldsup_id, callback) {
+    db.query(
+      "UPDATE department SET Sup_ID = ($1) WHERE Sup_ID = ($2);",
+      [newsup_id, oldsup_id],
+      (err, res) => {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
+  static drop(department_name, callback) {
+    db.query(
+      "DELETE FROM department WHERE department_name = ($1)",
+      [department_name],
+      (err, res) => {
+        if (err.error) return callback(err);
+        callback(res);
+      }
+    );
+  }
 }
 
 module.exports = Departments;

@@ -13,14 +13,17 @@ import ProtectedRoute from './routes/ProtectedRoute';
 
 import HomePage from './pages/HomePage';
 import ShowEmployeePage from './pages/ShowEmployeePage';
+import ShowDepartmentPage from './pages/ShowDepartmentPage';
 import AddEmployeePage from './pages/AddEmployeePage';
 import AboutUsPage from './pages/AboutUsPage';
 import EmployeeLogin from './pages/Employeelogin';
 import AdminLogin from './pages/Adminlogin';
 import OffRequest from './pages/OffRequest';
-import AddDepartment from './components/AddDepartment';
+import AddDepartment from './pages/AddDepartment';
 import CheckinPage from './pages/CheckinPage';
 
+import ShowOffRequestPage from './pages/ShowOffRequestPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 
@@ -35,22 +38,16 @@ function Navigation(props) {
             Employees
           </NavLink>
         </li>
-        
-        <li className="nav-item">
-          <NavLink className="nav-link" exact to="/add-employee">
-            Add New Employee
-          </NavLink>
-        </li>
 
         <li className="nav-item">
-          <NavLink className="nav-link" exact to="/add-department">
-            Add New Department
+          <NavLink className="nav-link" exact to="/departments">
+            Department
           </NavLink>
         </li>
         
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/offrequest">
-            Requst Dayoff
+            Requst
           </NavLink>
         </li>
 
@@ -61,6 +58,12 @@ function Navigation(props) {
         </li>
         
         <li className="nav-item">
+          <NavLink className="nav-link" exact to="/offrequest-table">
+            Requst
+          </NavLink>
+        </li>
+
+        <li className="nav-item">
           <NavLink className="nav-link" exact to="/about-us">
             About Us
           </NavLink>
@@ -69,7 +72,6 @@ function Navigation(props) {
     </nav>
   );
 }
-
 
 class App extends React.Component {
   render() {
@@ -80,8 +82,10 @@ class App extends React.Component {
             <div className="row justify-content-center">
               <Switch>
                 <AdminRoute path="/add-employee" component={AddEmployeePage} />
+                <AdminRoute path="/offrequest-table" component={ShowOffRequestPage} />
                 <AdminRoute path="/add-department" component={AddDepartment} />
                 <ProtectedRoute path="/employees" component={ShowEmployeePage} />
+                <ProtectedRoute path="/departments" component={ShowDepartmentPage} />
                 <EmpRoute path="/offrequest" component={OffRequest} />
                 <EmpRoute path="/check" component={CheckinPage} />
                 <Route path='/emplogin' component={EmployeeLogin} />

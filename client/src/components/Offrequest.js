@@ -1,42 +1,30 @@
 import React from 'react';
 import {useTable} from 'react-table'
 
-function EmployeeData(props){
+function RequestData(props){
 
     const data = React.useMemo(
-        () => props.empdata,
+        () => props.requestdata,
             [],
           )
           const columns = React.useMemo(
             () => [
               {
-                Header: 'Employee ID',
-                accessor: 'emp_id', // accessor is the "key" in the data
+                Header: 'Request ID',
+                accessor: 'request_id', // accessor is the "key" in the data
               },
               {
-                Header: 'First Name',
-                accessor: 'first_name',
+                Header: 'Request Date',
+                accessor: 'request_date',
               },
               {
-                Header: 'Last Name',
-                accessor: 'last_name',
+                Header: 'Emp ID',
+                accessor: 'emp_id',
               },
               {
-                Header: 'DoB',
-                accessor: 'dob',
+                Header: 'Reason',
+                accessor: 'reason',
               },
-              {
-                Header: 'Rest Day',
-                accessor: 'rest_day',
-              },
-              {
-                Header: 'Department',
-                accessor: 'department',
-              },
-              {
-                Header: 'Hourly Rate',
-                accessor: 'hourly_rate',
-              },              
             ],
             [],
           )
@@ -95,4 +83,4 @@ function EmployeeData(props){
             </table>
           )
 }
-export default EmployeeData;
+export default RequestData;

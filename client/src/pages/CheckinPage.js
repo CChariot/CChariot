@@ -15,7 +15,7 @@ export default class CheckinPage extends Component {
 
 
     componentDidMount = () => {
-        // this.getAllAttendanceData();
+        this.getAllAttendanceData();
     }
 
 
@@ -80,9 +80,9 @@ export default class CheckinPage extends Component {
 
 
     //check in 
-    checkInHandler = async(empid) => {
+    checkInHandler = async( empid, date, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/${empid}`, {
+        await fetch(`http://localhost:5000/api/attendance/checkin`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
@@ -100,7 +100,7 @@ export default class CheckinPage extends Component {
 
 
     //check out
-    checkOutHandler = async(empid) => {
+    checkOutHandler = async( empid, date, time ) => {
 
         await fetch(`http://localhost:5000/api/attendance/${empid}`, {
             method: 'post',
@@ -120,7 +120,7 @@ export default class CheckinPage extends Component {
 
 
     //lunch out
-    lunchOutHandler = async(empid) => {
+    lunchOutHandler = async( empid, date, time ) => {
 
         await fetch(`http://localhost:5000/api/attendance/${empid}`, {
             method: 'post',
@@ -140,7 +140,7 @@ export default class CheckinPage extends Component {
 
 
     //check in 
-    lunchBackHandler = async(empid) => {
+    lunchBackHandler = async( empid, date, time ) => {
 
         await fetch(`http://localhost:5000/api/attendance/${empid}`, {
             method: 'post',
@@ -160,29 +160,34 @@ export default class CheckinPage extends Component {
 
 
     submitHandler = () => {
-        /*
+        
+        let date = new Date(Date.now()).toISOString().replace('T',' ').replace('Z','');
+
+        let time = new Date()
+        let currenttime = time.getHours() + ":" + time.getMinutes()
+
         switch( this.state.checkType ){
             
             case 'checkin' :
-                this.checkInHandler(this.state.empid);
+                this.checkInHandler(this.state.empid, date, currenttime);
                 break;
             
             case 'checkout' :
-                this.checkOutHandler(this.state.empid);
+                this.checkOutHandler(this.state.empid, date, currenttime);
                 break;
             
             case 'lunchout' :
-                this.lunchOutHandler(this.state.empid);
+                this.lunchOutHandler(this.state.empid, date, currenttime);
                 break;
 
             case 'lunchback' :
-                this.lunchBackHandler(this.state.empid);
+                this.lunchBackHandler(this.state.empid, date, currenttime);
                 break;
             
             default:
                 alert('Error when submitting!');
         }
-        */
+
         alert('Checked!');
     }
     

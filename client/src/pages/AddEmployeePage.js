@@ -15,7 +15,8 @@ class AddEmployeePage extends React.Component {
     sup_id: '123',
     payrate: 12,
     hasDepartment: false,
-    departmentOptions: []
+    departmentOptions: [],
+    hourly_rate:''
   }
 
   componentDidMount = () =>{
@@ -131,20 +132,28 @@ class AddEmployeePage extends React.Component {
               />
               <br/>
             
-              <label htmlFor='fn'>Last Name</label>
+              <label htmlFor='ln'>Last Name</label>
               <input 
-                placeholder="last name..." id='fn' 
+                placeholder="last name..." id='ln' 
                 value={this.state.last}
                 onChange={this.lastInputHandler} 
                 required
               />
               <br/>
 
-              <label htmlFor='ln'>First Name</label>
+              <label htmlFor='fn'>First Name</label>
               <input 
-                placeholder="first name..." id='ln'
+                placeholder="first name..." id='fn'
                 value={this.state.first}
                 onChange={this.firstInputHandler} 
+                required
+              />
+              <br/>
+              <label htmlFor='hr'>Hourly Rate</label>
+              <input 
+                placeholder="$" id='hr'
+                value={this.state.hourly_rate}
+                onChange={this.hourlyRateInputHandler}
                 required
               />
               <br/>
