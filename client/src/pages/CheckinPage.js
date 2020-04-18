@@ -7,9 +7,8 @@ export default class CheckinPage extends Component {
     state = {
         AllAttendance: null,
         OneAttendance: null,
-        empid: null,
+        empid: '',
         checkType: '',
-        time: '',
 
     }
 
@@ -20,7 +19,6 @@ export default class CheckinPage extends Component {
 
 
     idInputHandler = (e) => {
-
         this.setState({
             empid: e.target.value
         })
@@ -35,23 +33,14 @@ export default class CheckinPage extends Component {
     }
 
 
-    timeInputHandler = (e) => {
-    
-        if(typeof(e) === 'string')
-        
-        this.setState({ 
-            time: e 
-        });
-    }
-
-
     // get all employees' attendance data
     getAllAttendanceData = async() => {
 
-        await fetch(`http://localhost:5000/api/attendance`)
+        await fetch('http://localhost:5000/api/attendance')
             .then(res => res.json())
             .then(data => {
 
+                console.log(data);
                 this.setState({
                     AllAttendance: data
                 }); 
@@ -82,7 +71,7 @@ export default class CheckinPage extends Component {
     //check in 
     checkInHandler = async( empid, date, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/checkin`, {
+        await fetch('http://localhost:5000/api/attendance/checkin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
@@ -104,7 +93,7 @@ export default class CheckinPage extends Component {
     //check out
     checkOutHandler = async( empid, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/checkout`, {
+        await fetch('http://localhost:5000/api/attendance/checkout', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
@@ -125,7 +114,7 @@ export default class CheckinPage extends Component {
     //lunch out
     lunchOutHandler = async( empid, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/lunchout`, {
+        await fetch('http://localhost:5000/api/attendance/lunchout', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
@@ -146,7 +135,7 @@ export default class CheckinPage extends Component {
     //check in 
     lunchBackHandler = async( empid, time ) => {
 
-        await fetch(`http://localhost:5000/api/attendance/lunchback`, {
+        await fetch('http://localhost:5000/api/attendance/lunchback', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(
@@ -164,12 +153,15 @@ export default class CheckinPage extends Component {
     }
 
 
-    submitHandler = () => {
+    submitHandler = (event) => {
+
+        event.preventDefault();
         
         let date = new Date(Date.now()).toISOString().replace('T',' ').replace('Z','');
 
         let time = new Date()
         let currenttime = time.getHours() + ":" + time.getMinutes()
+
 
         switch( this.state.checkType ){
             
@@ -220,13 +212,7 @@ export default class CheckinPage extends Component {
                     <Dropdown options={options} onChange={this.typeInputHandler} 
                         value={this.state.checkType} placeholder="Select" />
                     <br/><br/>
-
-                    <label>Time Now</label>
-                    <TimePicker
-                        onChange={this.timeInputHandler}
-                        value={this.state.time}
-                    />
-                    <br/><br/><br/>
+                    <br/>
 
                     <input type="submit" value="Check" />
 
