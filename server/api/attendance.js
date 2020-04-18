@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get("/", (req, res) => {
 
-  Attendance.retrieveAll(Emp_ID, (respond) => {
+  Attendance.retrieveAll( (respond) => {
     return res.json(respond);
   });
 });

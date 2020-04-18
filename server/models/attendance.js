@@ -5,7 +5,7 @@ const selectAll = "SELECT * from attendance";
 
 class Attendance {
 
-  static retrieveAll(values, callback) {
+  static retrieveAll(callback) {
     db.query(selectAll, (err, res) => {
       if (err.error) return callback(err);
       callback(res);
@@ -21,7 +21,7 @@ class Attendance {
 
   static checkin(date, Emp_ID, checkin, callback) {
     db.query(
-      "INSERT INTO attendance (date, Emp_ID, check_in) VALUES ($1, $2, $3)",
+      "INSERT INTO attendance VALUES ($1, $2, $3)",
       [date, Emp_ID, checkin],
       (err, res) => {
         if (err.error) return callback(err);
@@ -33,7 +33,7 @@ class Attendance {
   static checkout(Emp_ID, checkout, callback) {
     db.query(
       `UPDATE attendance
-        SET Check_out = ${checkout}
+        SET Check_out = '${checkout}'
         WHERE attendance.Emp_ID = ${Emp_ID};`,
       (err, res) => {
         if (err.error) return callback(err);
@@ -45,7 +45,7 @@ class Attendance {
   static lunchout(Emp_ID, lunchout, callback) {
     db.query(
       `UPDATE attendance
-        SET Check_out = ${lunchout}
+        SET Lunch_out = '${lunchout}'
         WHERE attendance.Emp_ID = ${Emp_ID};`,
       (err, res) => {
         if (err.error) return callback(err);
@@ -57,7 +57,7 @@ class Attendance {
   static lunchback(Emp_ID, lunchback, callback) {
     db.query(
       `UPDATE attendance
-        SET Check_out = ${lunchback}
+        SET Lunch_back = '${lunchback}'
         WHERE attendance.Emp_ID = ${Emp_ID};`,
       (err, res) => {
         if (err.error) return callback(err);
