@@ -1,6 +1,7 @@
 const db = require("../database");
 
 const select =
+  //query to retrieve employee id, supervisor id and employee hourly rate by joining employees and department.
   "SELECT Emp_ID, Sup_ID, department_name, hourly_rate FROM employees JOIN department ON employees.department = department.department_name AND Emp_ID = ($1)";
 
 class Employeeprofile {

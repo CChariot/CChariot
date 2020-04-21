@@ -1,6 +1,8 @@
 const db = require("../database");
 
+//query for reviewing certain off request.
 const select = "SELECT * from offrequest WHERE Request_ID = ($1)";
+//query for listing all request
 const selectAll = "SELECT * from offrequest";
 
 class Request {

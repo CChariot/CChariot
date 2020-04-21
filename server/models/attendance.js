@@ -1,10 +1,10 @@
 const db = require("../database");
-
+//query to check all attendance record of certain employee.
 const select = "SELECT * from attendance WHERE Emp_ID = ($1)";
+//query to check attandance record.
 const selectAll = "SELECT * from attendance";
 
 class Attendance {
-
   static retrieveAll(callback) {
     db.query(selectAll, (err, res) => {
       if (err.error) return callback(err);
@@ -32,6 +32,7 @@ class Attendance {
 
   static checkout(Emp_ID, checkout, callback) {
     db.query(
+      //query to enter checkout time into the database.
       `UPDATE attendance
         SET Check_out = '${checkout}'
         WHERE attendance.Emp_ID = ${Emp_ID};`,
@@ -44,6 +45,7 @@ class Attendance {
 
   static lunchout(Emp_ID, lunchout, callback) {
     db.query(
+      //query to log lunch break start time
       `UPDATE attendance
         SET Lunch_out = '${lunchout}'
         WHERE attendance.Emp_ID = ${Emp_ID};`,
@@ -56,6 +58,7 @@ class Attendance {
 
   static lunchback(Emp_ID, lunchback, callback) {
     db.query(
+      //query to log lunch break end time
       `UPDATE attendance
         SET Lunch_back = '${lunchback}'
         WHERE attendance.Emp_ID = ${Emp_ID};`,
