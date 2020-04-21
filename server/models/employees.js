@@ -1,6 +1,7 @@
 const db = require("../database");
-
+//query to retrieve employee's profile.
 const select = "SELECT * from employees WHERE Emp_ID = ($1)";
+//query to retrieve all employees' profile ordered by employee id.
 const selectAll = "SELECT * from employees ORDER BY EMP_ID";
 
 class Employees {
@@ -29,6 +30,7 @@ class Employees {
     callback
   ) {
     db.query(
+      //taking new entry
       "INSERT INTO employees (Emp_ID, last_name, first_name, dob, rest_day, department, hourly_rate) VALUES ($1, $2, $3, $4, $5, $6, $7)",
       [emp_id, last_name, first_name, dob, rest_day, department, hourly_rate],
       (err, res) => {
