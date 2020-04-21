@@ -55,7 +55,7 @@ export default class OffRequest extends Component {
                 <div className="text-center">
                 <h2>Dayoff Requst</h2>
                 <p>Comment your off request below</p>
-                <p>Please enter your EmpID and name before submitting:</p>
+                <p>Please enter your EmpID before submitting:</p>
                 
                 <textarea rows="4" cols="50" name="request" 
                         value={this.state.message} onChange={this.messageChangeHandler}>
